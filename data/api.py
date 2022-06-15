@@ -1,13 +1,10 @@
+from datetime import datetime as dt
 from enum import Enum
+from functools import singledispatch
 import os
-from urllib.parse import urljoin
 import requests
 from requests import Response
-from functools import partial, singledispatch
 from typing import Any, Callable, Tuple
-from dataclasses import dataclass, field
-from datetime import datetime as dt
-from abc import ABC, abstractmethod
 
 import pandas as pd
 

@@ -7,7 +7,7 @@ setup(
     version="0.0.1",
     author="Charlie Cone",
     author_email="charliecone624@gmail.com",
-    description="A package to convert your Jupyter Notebook",\
+    description="A collection of objects and functions to interact with the AlphaVantage api.",\
     url="https://github.com/charliecone624/pharos",
     packages=find_packages(),
     install_requires=requirements,
