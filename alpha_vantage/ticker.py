@@ -6,9 +6,9 @@ from enum import Enum
 
 from numpy.typing import ArrayLike
 
-from core import api, etl
+from ..core import api, etl
 
-class Components(Enum):
+class Tables(Enum):
     overview = ('OVERVIEW', etl.parse_json)
     balance_sheet = ('BALANCE_SHEET', partial(etl.parse_json_branch, branch = 'quarterlyReports'))
     income_statement = ('INCOME_STATEMENT', partial(etl.parse_json_branch, branch = 'quarterlyReports'))
@@ -33,7 +33,7 @@ class Ticker:
     cash_flow: ArrayLike = field(init=False, default=None)
     earnings: ArrayLike = field(init=False, default=None)
 
-    def get(self, comp: Components) -> None:
+    def get(self, comp: Tables) -> None:
         request = comp.endpoint
         raw = self.__client__.get(function = request, symbol = self.symbol)
         parsed = comp.parse(raw)

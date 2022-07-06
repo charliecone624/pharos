@@ -2,7 +2,7 @@ from dataclasses import dataclass, InitVar
 
 import pandas as pd
 
-from .ticker import Components
+from .ticker import Tables
 from .utilities import build_portfolio
 
 @dataclass
@@ -16,7 +16,7 @@ class Portfolio:
     def __post_init__(self, symbols):
         self.raw_data = build_portfolio(symbols)
 
-    def __group_ticker_data__(self, c: Components) -> pd.DataFrame:
+    def __group_ticker_data__(self, c: Tables) -> pd.DataFrame:
         grouped = pd.DataFrame()
         for T in self.raw_data.keys():
             df = getattr(self.raw_data[T], c.name)
@@ -31,16 +31,16 @@ class Portfolio:
     
     @property
     def balance_sheet(self):
-        return self.__group_ticker_data__(Components.balance_sheet)
+        return self.__group_ticker_data__(Tables.balance_sheet)
     
     @property
     def earnings(self):
-        return self.__group_ticker_data__(Components.earnings)
+        return self.__group_ticker_data__(Tables.earnings)
     
     @property
     def income_statement(self):
-        return self.__group_ticker_data__(Components.income_statement)
+        return self.__group_ticker_data__(Tables.income_statement)
     
     @property
     def cash_flow(self):
-        return self.__group_ticker_data__(Components.cash_flow)
+        return self.__group_ticker_data__(Tables.cash_flow)

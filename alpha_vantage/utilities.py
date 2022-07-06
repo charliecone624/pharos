@@ -5,7 +5,7 @@ from functools import partial
 from numpy.typing import ArrayLike
 
 from ..core import api, etl
-from .ticker import Ticker, Components
+from .ticker import Ticker, Tables
 
 State = Enum('State', 'active delisted')
 Horizon = Enum('Horizon', '3month 6month 12month')
@@ -51,8 +51,8 @@ def build_ticker(symbol: str) -> Ticker:
         :param symbol(str): str representing valid NASDAQ or NYSE listing to query
     """
     T = Ticker(symbol)
-    for i in Components.__members__:
-        T.get(Components[i])
+    for i in Tables.__members__:
+        T.get(Tables[i])
     return T
 
 def build_portfolio(tickers: list[str]) -> dict:
